@@ -12,6 +12,7 @@ const BackArrowButton = () => {
     <div style={{ marginTop: "20px", padding: "10px" }}>
       <Link to="/" style={{ textDecoration: "none" }}>
         <Button
+          role="button"
           onCanPlay={() => navigate("/")}
           variant="contained"
           endIcon={<Icon icon="ion:arrow-back-outline" />}
