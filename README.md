@@ -44,3 +44,21 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+## Installing Module not found: Can't resolve '@mui/x-data-grid'
+
+yarn add @mui/material @emotion/react @emotion/styled
+
+yarn add @mui/x-data-grid
+
+yarn add @mui/x-data-grid
+
+
+
+# UseContext
+
+To be honest when i first gotta the assigment i was not planning to use state managment, i thought that its not needed and things would be straight forwad , but when i was using webscokets and i wanted to spearte my ui and logic, prop drilling was introduced and i avoided it by using useContext 
