@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { IMarketStreams } from "../interfaces";
-import BackArrowButton from "./BackArrowButton";
+
+import { Error500 } from "../pages";
 
 const WebSocketMarketStream: React.FC = () => {
   const [marketData, setMarketData] = useState<IMarketStreams | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const newSocket = new WebSocket(
@@ -45,8 +47,11 @@ const WebSocketMarketStream: React.FC = () => {
       }
     };
 
-    newSocket.onclose = () => {
-      console.log("WebSocket closed");
+    newSocket.onclose = (event: CloseEvent) => {
+      console.log("WebSocket closed with code:", event.code);
+      if (event.code === 404 || event.code === 500) {
+        setError("Server error occurred. Please try again later.");
+      }
     };
 
     return () => {
@@ -55,10 +60,12 @@ const WebSocketMarketStream: React.FC = () => {
     };
   }, []);
 
+  if (error) {
+    return <Error500 />;
+  }
+
   return (
     <div>
-      <BackArrowButton />
-
       {marketData && (
         <div>
           <h2>Market Data</h2>

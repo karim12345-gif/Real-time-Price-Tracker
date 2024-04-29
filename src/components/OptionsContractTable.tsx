@@ -69,21 +69,7 @@ const OptionsContractTable = () => {
           );
         },
       },
-      {
-        flex: 0.175,
-        minWidth: 210,
-        field: "date",
-        headerName: "Date",
-        renderCell: ({ row }: ExchangeResponseRow) => {
-          return (
-            <Fragment>
-              <Typography variant="body2" sx={{ color: "text.primary" }}>
-                {row.expiration_date}
-              </Typography>
-            </Fragment>
-          );
-        },
-      },
+
       {
         flex: 0.175,
         minWidth: 210,

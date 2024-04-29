@@ -59,6 +59,10 @@ yarn add @mui/x-data-grid
 
 
 
-# UseContext
+# UseCustomeHook
 
-To be honest when i first gotta the assigment i was not planning to use state managment, i thought that its not needed and things would be straight forwad , but when i was using webscokets and i wanted to spearte my ui and logic, prop drilling was introduced and i avoided it by using useContext 
+To be honest when i first gotta the assigment i was not planning to use state managment, i thought that its not needed and things would be straight forwad , but when i was using webscokets and i wanted to spearte my ui and logic, prop drilling was introduced and i avoided it by using cusome hook
+
+##
+
+One disadvantage of adding the WebSocket logic directly inside the useEffect hook is that it couples the WebSocket connection lifecycle to the lifecycle of the component using the hook. This means that every time the component using the hook mounts or updates, a new WebSocket connection will be established. While this might be suitable for some use cases, it may not be optimal for others, especially if you need more fine-grained control over the WebSocket connection.
