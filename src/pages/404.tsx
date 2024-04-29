@@ -34,6 +34,8 @@ const Img = styled("img")(({ theme }) => ({
 const StyledTypography = styled(Typography)`
   color: #fff;
 `;
+
+//** Error404 Component
 const Error404 = () => {
   return (
     <Box className="content-center">

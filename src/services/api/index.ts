@@ -1,3 +1,3 @@
-import CoinGeckoApi from "./CoinGeckoApi";
+import PolygonApi from "./PolygonApi";
 
-export {CoinGeckoApi}
+export {PolygonApi}

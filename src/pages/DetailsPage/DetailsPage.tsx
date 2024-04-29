@@ -12,7 +12,6 @@ const DetailsPage = () => {
     <>
       <BackArrowButton />
       <Grid container spacing={3} justifyContent="center">
-        {/* Center the Grid container */}
         <Grid
           item
           xs={8}
@@ -21,7 +20,7 @@ const DetailsPage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column", // Adjusted to align button and table vertically
+            flexDirection: "column",
           }}
         >
           <Suspense

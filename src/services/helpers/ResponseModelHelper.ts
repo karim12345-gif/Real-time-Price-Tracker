@@ -10,6 +10,7 @@ export const isResponseModel = (obj: any): obj is ResponseModel<any> => {
   }
 };
 
+// ** Helper function to handle response model
 export const ResponseModelHelper = (error: any) => {
   const navigate = useNavigate();
   //** search parameters via the URLSearchParams */

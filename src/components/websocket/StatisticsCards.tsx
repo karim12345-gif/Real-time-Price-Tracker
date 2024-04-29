@@ -1,63 +1,98 @@
-// ** MUI Imports
+import React from "react";
+
+//** Material-UI components */
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
+import { Fab, IconButton, Tooltip } from "@mui/material";
 
-// ** Icon Imports
+//** Iconify components */
 import { Icon } from "@iconify/react";
 
-// ** Custom Component Import
+//** my components */
 import CustomChip from "../chip/CustomeChip";
-import { Fab, IconButton, Tooltip } from "@mui/material";
-import { ThemeColor } from "../layouts/types";
-import { useWebSocket } from "../../hook";
 import { Error500 } from "../../pages";
+import { useWebSocket } from "../../hook";
+import CircularIndeterminate from "../spinner/CircularIndeterminate";
 
-export interface CardData {
-  icon: string;
-  title: string;
-  tooltip: string;
-  color: ThemeColor;
-  changePercentage?: number | string;
-  totalUsers?: number | string | JSX.Element;
-}
+//** interface */
+import { CardData } from "../../interfaces";
 
 const StatisticsCards: React.FC = () => {
   const url =
+    process.env.WEBSCOKET_URL ||
     "wss://stream.base-mainnet.jojo.exchange/v1/multiple?streams=btcusdc@market";
 
+  //** Custom hook to get market data */
   const { marketData, error } = useWebSocket(url);
 
-  console.log("marketData", marketData);
+  //** Card data */
   const cardData: CardData[] = [
     {
-      totalUsers: marketData?.indexPrice,
-      title: "All markPrice",
-      icon: "mdi-account-multiple",
-      color: "primary",
-      tooltip: "Number mark Price ",
+      totalUsers: marketData?.["24hVolume"],
+      title: "All 24h volume",
+      icon: "tabler:volume",
+      color: "warning",
+      tooltip: "Number Price 24h ago ",
+      changePercentage: marketData?.price24HAgo,
+    },
+    {
+      totalUsers: marketData?.fundingRate,
+      title: "Funding Rate",
+      icon: "material-symbols:star-rate",
+      color: "success",
+      tooltip: "Number of funding rate subscriptions",
+      changePercentage: marketData?.fundingRate,
+    },
+    {
+      totalUsers: marketData?.lastTradePrice,
+      title: "Last Trade Price",
+      icon: "solar:tag-price-bold",
+      color: "error",
+      tooltip: "Number of Last Trade Price subscriptions",
+      changePercentage: marketData?.lastTradePrice,
+    },
+    {
+      totalUsers: marketData?.markPrice,
+      title: "Last Mark Price",
+      icon: "fa6-solid:money-bills",
+      color: "info",
+      tooltip: "Number of Last index Price subscriptions",
       changePercentage: marketData?.indexPrice,
     },
     {
-      totalUsers: 54213,
-      title: "Padding Subscriptions",
-      icon: "mdi-account-convert",
-      color: "success",
-      tooltip: " Number of padding subscriptions",
-      changePercentage: 17,
+      totalUsers: marketData?.liquidationPriceOff,
+      title: "Last liquidation Price Off",
+      icon: "pepicons-pencil:dollar-off",
+      color: "info",
+      tooltip: "Number of liquidation Threshold ",
+      changePercentage: marketData?.liquidationThreshold,
     },
     {
-      totalUsers: 859,
-      title: "Active Subscriptions",
-      icon: "mdi-account-check",
-      color: "info",
-      tooltip: "Number of active subscriptions",
-      changePercentage: 56,
+      totalUsers: marketData?.lastTradePrice,
+      title: "Last trade off",
+      icon: "pepicons-pencil:dollar-off",
+      color: "error",
+      tooltip: "Next funding time",
+      changePercentage: marketData?.nextFundingTime,
     },
+    {
+      totalUsers: marketData?.openInterest,
+      title: "Open Interest",
+      icon: "pepicons-pencil:lock-open",
+      color: "warning",
+      tooltip: "Threshold",
+      changePercentage: marketData?.liquidationThreshold,
+    },
+    // Add more CardData objects as needed
   ];
 
+  //** If marketData is not available, show spinner */
+  if (!marketData) return <CircularIndeterminate />;
+
+  //** If error occurs, show Error500 component */
   if (error) return <Error500 />;
 
   return (
@@ -112,11 +147,10 @@ const StatisticsCards: React.FC = () => {
                 >
                   {typeof item.totalUsers === "number" ? (
                     <Typography variant="h4" sx={{ mb: 1 }}>
-                      {/* If decimal values are all zeros then remove the zeros and show the integer value else show the value with the decimals */}
                       {item.totalUsers}
                     </Typography>
                   ) : (
-                    item.totalUsers // JSX element
+                    item.totalUsers
                   )}
                   <Fab
                     size="small"

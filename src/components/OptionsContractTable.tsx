@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ** React Imports
 import { Fragment, useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
 
 // ** MUI Imports
 import Card from "@mui/material/Card";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CardHeader from "@mui/material/CardHeader";
-import CustomChip from "./chip/CustomeChip";
-
-// ** Utils Import
-import { Error500 } from "../pages";
-import { OptionsContractResponse } from "../interfaces";
 import { Box, Typography } from "@mui/material";
-import { useGetListOptionsContract } from "../services/hooks/useGetListOptionsContract";
-import CircularIndeterminate from "./spinner/CircularIndeterminate";
-import { Icon } from "@iconify/react";
 
-interface ExchangeResponseRow {
-  row: OptionsContractResponse;
-}
+// ** Custom Components
+import CustomChip from "./chip/CustomeChip";
+import { Error500 } from "../pages";
+import CircularIndeterminate from "./spinner/CircularIndeterminate";
+
+// ** interface
+import { ExchangeResponseRow, OptionsContractResponse } from "../interfaces";
+
+// ** Hooks
+import { useGetListOptionsContract } from "../services/hooks/useGetListOptionsContract";
 
 const OptionsContractTable = () => {
   //** states */
@@ -29,6 +29,7 @@ const OptionsContractTable = () => {
     pageSize: 5,
   });
 
+  //** fetching data from the API with react query hook
   const { data, isLoading, error } = useGetListOptionsContract();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const OptionsContractTable = () => {
 
   const statusValue = data?.status ? "success" : "error";
 
+  // ** render data
   const renderData = () => {
     const columns: GridColDef[] = [
       {
@@ -187,8 +189,10 @@ const OptionsContractTable = () => {
     );
   };
 
+  // ** show spinner if data is not yet fetched
   if (isLoading || !data) return <CircularIndeterminate />;
 
+  // ** show error message if there is an error
   if (error) return <Error500 />;
 
   return renderData();

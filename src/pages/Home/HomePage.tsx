@@ -17,7 +17,6 @@ const Home = () => {
     <>
       <Header />
       <Grid container spacing={3} justifyContent="center">
-        {/* Center the Grid container */}
         <Grid
           item
           xs={12}
@@ -26,7 +25,7 @@ const Home = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column", // Adjusted to align button and table vertically
+            flexDirection: "column",
           }}
         >
           <Link

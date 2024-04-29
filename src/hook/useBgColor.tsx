@@ -1,6 +1,6 @@
 // ** MUI Imports
 import { useTheme } from "@mui/material/styles";
-import { hexToRGBA } from "../utils/hex-to-rgba";
+import { hexToRGBA } from "../components/utils/hex-to-rgba";
 
 // ** Util Import
 
@@ -11,6 +11,7 @@ export type UseBgColorType = {
   };
 };
 
+//** background colors FROM Material UI */
 const UseBgColor = () => {
   // ** Hooks
   const theme = useTheme();

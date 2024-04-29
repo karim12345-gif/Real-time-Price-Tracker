@@ -1,3 +1,5 @@
+import { ThemeColor } from "../components/layouts/types";
+
 interface ICoinsMarketsResponse {
   id: string;
   symbol: string;
@@ -64,8 +66,27 @@ interface IMarketStreams {
 }
 
 
+ interface CardData {
+  icon: string;
+  title: string;
+  tooltip: string;
+  color: ThemeColor;
+  changePercentage?: number | string;
+  totalUsers?: number | string | JSX.Element;
+}
+
+interface ExchangeResponseRow {
+  row: OptionsContractResponse;
+}
+
+interface ReactQueryProviderProps {
+  children: React.ReactNode;
+}
 
 
 
 
-export type { ICoinsMarketsResponse , IOptionsContractResponse, OptionsContractResponse,IMarketStreams};
+
+
+
+export type { ICoinsMarketsResponse , IOptionsContractResponse, OptionsContractResponse,IMarketStreams, CardData, ExchangeResponseRow, ReactQueryProviderProps};

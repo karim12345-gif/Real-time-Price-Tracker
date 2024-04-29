@@ -31,9 +31,12 @@ const Img = styled("img")(({ theme }) => ({
   },
 }));
 
+//** Styled component Typography
 const StyledTypography = styled(Typography)`
   color: #fff;
 `;
+
+//** Error500 Component
 const Error500 = () => {
   return (
     <Box className="content-center">

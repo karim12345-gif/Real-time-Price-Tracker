@@ -1,27 +1,15 @@
+// ** React Imports
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
+// ** Styles
 import "./index.css";
-import {
-  DetailsPage,
-  HomePage,
-  NotFoundPage,
-  ReactQueryProvider,
-} from "./pages";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <NotFoundPage />,
-  },
-  {
-    path: "/detailsPage",
-    element: <DetailsPage />,
-    errorElement: <NotFoundPage />,
-  },
-]);
+// ** Custom Components
+import { ReactQueryProvider } from "./pages";
+// ** Router
+import router from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

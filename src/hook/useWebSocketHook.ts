@@ -6,14 +6,14 @@ const useWebSocket = (url: string) => {
   const [error, setError] = useState<string | null>(null);
 
 
-  //** this hook will work with any get websockets  */
+ // ** Function to handle WebSocket connection
 
   useEffect(() => {
     const newSocket = new WebSocket(url);
 
     newSocket.onopen = () => {
       console.log('WebSocket connected');
-      // Subscribe to market stream
+      // Subscribing to market stream according to the API documentation
       newSocket.send(
         JSON.stringify({
           id: 1,
@@ -24,16 +24,16 @@ const useWebSocket = (url: string) => {
     };
 
     newSocket.onmessage = (event: MessageEvent) => {
-      // Check if the message is a ping frame
+      // Checking if the message is a ping frame
       if (event.data === 'ping') {
-        // Handle ping frame (optional)
+        // Handling ping frame (optional)
         console.log('Received ping frame');
         // Respond with a pong frame to maintain the connection
         newSocket.send('pong');
         return;
       }
 
-      // Parse the message as JSON
+      // Parsing the message as JSON
       try {
         const { data }: { stream: string; data: IMarketStreams } = JSON.parse(
           event.data as string
@@ -55,7 +55,7 @@ const useWebSocket = (url: string) => {
     };
 
     return () => {
-      // Cleanup function: Close WebSocket connection when component unmounts
+      // Cleanup function to Close WebSocket connection when component unmounts, preventing memory leaks
       newSocket.close();
     };
   }, [url]);

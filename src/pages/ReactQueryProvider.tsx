@@ -6,10 +6,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ResponseModelHelper } from "../services/helpers";
-
-interface ReactQueryProviderProps {
-  children: React.ReactNode;
-}
+import { ReactQueryProviderProps } from "../interfaces";
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const queryClient = new QueryClient({
