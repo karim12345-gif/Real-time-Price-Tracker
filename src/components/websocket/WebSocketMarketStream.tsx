@@ -55,9 +55,7 @@ const WebSocketMarketStream: React.FC = () => {
     };
   }, []);
 
-  return (
-    <div>{marketData && <MarketDataDisplay marketData={marketData} />}</div>
-  );
+  return <div>{marketData && <MarketDataDisplay />}</div>;
 };
 
 export default WebSocketMarketStream;

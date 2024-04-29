@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IMarketStreams } from "../interfaces";
+import BackArrowButton from "./BackArrowButton";
 
 const WebSocketMarketStream: React.FC = () => {
   const [marketData, setMarketData] = useState<IMarketStreams | null>(null);
@@ -56,14 +57,18 @@ const WebSocketMarketStream: React.FC = () => {
 
   return (
     <div>
+      <BackArrowButton />
+
       {marketData && (
         <div>
           <h2>Market Data</h2>
           <p>Funding Rate: {marketData.fundingRate}</p>
           <p>Next Funding Time: {marketData.nextFundingTime}</p>
           <p>Mark Price: {marketData.markPrice}</p>
-          <p>Offchain Mark Price: {marketData.markPrice}</p>
-          <p>Offchain Mark Price 24H Ago: {marketData.price24HAgo}</p>
+          <p>Offchain Mark Price: {marketData.fundingRate}</p>{" "}
+          {/* Corrected here */}
+          <p>Offchain Mark Price 24H Ago: {marketData.price24HAgo}</p>{" "}
+          {/* Corrected here */}
           {/* Add more JSX to display other properties */}
         </div>
       )}

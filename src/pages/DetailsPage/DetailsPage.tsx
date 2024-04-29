@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import CircularIndeterminate from "../../components/spinner/CircularIndeterminate";
-const WebSocketComponent = React.lazy(
-  () => import("../../components/WebSocketComponent")
+const WebSocketMarketStream = React.lazy(
+  () => import("../../components/WebSocketMarketStream")
 );
 
 const DetailsPage = () => {
@@ -14,7 +14,7 @@ const DetailsPage = () => {
           </div>
         }
       >
-        <WebSocketComponent />
+        <WebSocketMarketStream />
       </Suspense>
     </div>
   );

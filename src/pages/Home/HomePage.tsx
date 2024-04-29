@@ -1,9 +1,11 @@
-// ** MUI Imports
+import React from "react";
 import Grid from "@mui/material/Grid";
 import { Header } from "../../components";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Suspense } from "react";
-import React from "react";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Icon } from "@iconify/react";
 
 // Lazy loading for OptionsContractTable component
 const LazyOptionsContractTable = React.lazy(
@@ -24,8 +26,21 @@ const Home = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            flexDirection: "column", // Adjusted to align button and table vertically
           }}
         >
+          <Link
+            to="/detailsPage"
+            style={{ textDecoration: "none", marginBottom: "20px" }}
+          >
+            <Button
+              variant="contained"
+              endIcon={<Icon icon="fa6-solid:chart-line" />}
+            >
+              Check Live Prices
+            </Button>
+          </Link>
+
           <Suspense fallback={<CircularProgress />}>
             <LazyOptionsContractTable />
           </Suspense>

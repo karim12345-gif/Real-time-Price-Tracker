@@ -31,8 +31,9 @@ const Img = styled("img")(({ theme }) => ({
   },
 }));
 
-// const errorImage = require("../../public/assets/images/pages/404.png");
-
+const StyledTypography = styled(Typography)`
+  color: #fff;
+`;
 const Error404 = () => {
   return (
     <Box className="content-center">
@@ -46,10 +47,10 @@ const Error404 = () => {
         }}
       >
         <BoxWrapper>
-          <Typography variant="h1" sx={{ mb: 2.5 }}>
+          <StyledTypography variant="h1" sx={{ mb: 2.5 }}>
             404
-          </Typography>
-          <Typography
+          </StyledTypography>
+          <StyledTypography
             variant="h5"
             sx={{
               mb: 2.5,
@@ -57,13 +58,18 @@ const Error404 = () => {
               fontSize: "1.5rem !important",
             }}
           >
+            {" "}
             Page Not Found ⚠️
-          </Typography>
-          <Typography variant="body2">
+          </StyledTypography>
+          <StyledTypography variant="body2">
             We couldn&prime;t find the page you are looking for.
-          </Typography>
+          </StyledTypography>
         </BoxWrapper>
-        <Img alt="error-illustration" src="/images/pages/404.png" />
+        <Img
+          height="400"
+          alt="error-illustration"
+          src="/images/pages/404.png"
+        />
         <Button component={Link} to="/" variant="contained" sx={{ px: 5.5 }}>
           Back to Home
         </Button>

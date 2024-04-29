@@ -31,6 +31,9 @@ const Img = styled("img")(({ theme }) => ({
   },
 }));
 
+const StyledTypography = styled(Typography)`
+  color: #fff;
+`;
 const Error500 = () => {
   return (
     <Box className="content-center">
@@ -44,18 +47,22 @@ const Error500 = () => {
         }}
       >
         <BoxWrapper>
-          <Typography variant="h1" sx={{ mb: 2.5 }}>
+          <StyledTypography variant="h1" sx={{ mb: 2.5 }}>
             500
-          </Typography>
-          <Typography
+          </StyledTypography>
+
+          <StyledTypography
             variant="h5"
             sx={{ mb: 2.5, fontSize: "1.5rem !important" }}
           >
             Internal server error 👨🏻‍💻
-          </Typography>
-          <Typography variant="body2">Oops, something went wrong!</Typography>
+          </StyledTypography>
+
+          <StyledTypography variant="body2">
+            Oops, something went wrong!
+          </StyledTypography>
         </BoxWrapper>
-        <Img alt="error-illustration" src="/images/pages/500.png" />
+        <Img alt="error-illustration" src="/images/pages/404.png" />
         <Button component={Link} to="/" variant="contained" sx={{ px: 5.5 }}>
           Back to Home
         </Button>

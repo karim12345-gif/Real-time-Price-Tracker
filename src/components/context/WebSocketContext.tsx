@@ -9,12 +9,12 @@ import { IMarketStreams } from "../../interfaces";
 
 // Define the context props
 interface WebSocketContextProps {
-  marketData: IMarketStreams | null;
+  marketData: IMarketStreams | undefined;
 }
 
 // Create the WebSocket context
 const WebSocketContext = createContext<WebSocketContextProps>({
-  marketData: null,
+  marketData: {} as IMarketStreams,
 });
 
 // Custom hook to use the WebSocket context
@@ -24,7 +24,7 @@ export const useWebSocket = () => useContext(WebSocketContext);
 export const WebSocketProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [marketData, setMarketData] = useState<IMarketStreams | null>(null);
+  const [marketData, setMarketData] = useState<IMarketStreams>();
 
   useEffect(() => {
     const newSocket = new WebSocket(
