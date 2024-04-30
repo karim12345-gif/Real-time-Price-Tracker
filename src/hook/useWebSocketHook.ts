@@ -12,13 +12,12 @@ const useWebSocket = (url: string) => {
     const newSocket = new WebSocket(url);
 
     newSocket.onopen = () => {
-      console.log('WebSocket connected');
       // Subscribing to market stream according to the API documentation
       newSocket.send(
         JSON.stringify({
-          id: 1,
-          method: 'SUBSCRIBE',
-          params: ['btcusdc@market'],
+          id: process.env.REACT_APP_WEBSOCKET_ID_KEY,
+          method: process.env.REACT_APP_WEBSOCKET_METHOD_KEY,
+          params: process.env.REACT_APP_WEBSOCKET_PARAMS_KEY,
         })
       );
     };
@@ -26,8 +25,7 @@ const useWebSocket = (url: string) => {
     newSocket.onmessage = (event: MessageEvent) => {
       // Checking if the message is a ping frame
       if (event.data === 'ping') {
-        // Handling ping frame (optional)
-        console.log('Received ping frame');
+      
         // Respond with a pong frame to maintain the connection
         newSocket.send('pong');
         return;
@@ -38,7 +36,7 @@ const useWebSocket = (url: string) => {
         const { data }: { stream: string; data: IMarketStreams } = JSON.parse(
           event.data as string
         );
-        console.log('Received market data:', data);
+      
         // Set the received market data to state
         setMarketData(data);
       } catch (error) {
@@ -48,7 +46,7 @@ const useWebSocket = (url: string) => {
     };
 
     newSocket.onclose = (event: CloseEvent) => {
-      console.log('WebSocket closed with code:', event.code);
+    
       if (event.code === 404 || event.code === 500) {
         setError('Server error occurred. Please try again later.');
       }

@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 import { ResponseModel } from '../../models';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import routes from '../../routes';
 
 export const isResponseModel = (obj: any): obj is ResponseModel<any> => {
   if (typeof obj === 'object' && obj !== null) {
@@ -10,15 +11,14 @@ export const isResponseModel = (obj: any): obj is ResponseModel<any> => {
   }
 };
 
-// ** Helper function to handle response model
 export const ResponseModelHelper = (error: any) => {
   const navigate = useNavigate();
-  //** search parameters via the URLSearchParams */
+  // Search parameters via the URLSearchParams
   const [searchParams] = useSearchParams();
 
   if (!error.response) {
     // Redirect to error page
-    navigate(error.error, { state: { message: error.message, returnUrl: searchParams.get('returnUrl') } });
+    navigate(routes.error, { state: { message: error.message, returnUrl: searchParams.get('returnUrl') } });
     toast.error(error.message, { id: 'loading' });
     return;
   }
@@ -28,7 +28,7 @@ export const ResponseModelHelper = (error: any) => {
 
     if (result === 401) {
       // Redirect to home page if unauthorized
-      navigate('/');
+      navigate(routes.home);
       return;
     } else {
       toast.error(message, { id: 'loading' });
@@ -38,13 +38,24 @@ export const ResponseModelHelper = (error: any) => {
     const status = error.response.status;
     if (status === 401) {
       // Redirect to home page if unauthorized
-      navigate('/');
+      navigate(routes.home);
       toast.error(error.message, { id: 'loading' });
+      return;
+    } else if (status === 500 ) {
+      // Show error toast for status code 500
+      navigate(routes[500])
+      toast.error('Something is wrong', { id: 'loading' });
+      return;
+    }
+    else if (status === 404 ) {
+      // Show error toast for status code 500
+      navigate(routes[404])
+      toast.error('Something is wrong', { id: 'loading' });
       return;
     }
 
-    // Redirect to error page
-    navigate(error.error, { state: { message: error.message, returnUrl: searchParams.get('returnUrl') } });
+    // Redirect to error page for other status codes
+    navigate(routes.error, { state: { message: error.message, returnUrl: searchParams.get('returnUrl') } });
     toast.error(error.message, { id: 'loading' });
     return;
   }

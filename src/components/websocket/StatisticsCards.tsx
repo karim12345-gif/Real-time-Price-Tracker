@@ -21,9 +21,7 @@ import CircularIndeterminate from "../spinner/CircularIndeterminate";
 import { CardData } from "../../interfaces";
 
 const StatisticsCards: React.FC = () => {
-  const url =
-    process.env.WEBSCOKET_URL ||
-    "wss://stream.base-mainnet.jojo.exchange/v1/multiple?streams=btcusdc@market";
+  const url = process.env.REACT_APP_WEBSOCKET_URL_LINK || "no url found";
 
   //** Custom hook to get market data */
   const { marketData, error } = useWebSocket(url);

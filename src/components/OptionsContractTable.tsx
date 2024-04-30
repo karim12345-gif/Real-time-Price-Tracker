@@ -7,7 +7,7 @@ import { Icon } from "@iconify/react";
 import Card from "@mui/material/Card";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CardHeader from "@mui/material/CardHeader";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 // ** Custom Components
 import CustomChip from "./chip/CustomeChip";
@@ -38,6 +38,13 @@ const OptionsContractTable = () => {
   }, [data]);
 
   const statusValue = data?.status ? "success" : "error";
+
+  // ** handle next URL
+  const handleCheckUrl = () => {
+    if (data?.next_url) {
+      window.location.href = data?.next_url; // Navigate to the URL
+    }
+  };
 
   // ** render data
   const renderData = () => {
@@ -168,6 +175,33 @@ const OptionsContractTable = () => {
     return (
       <Card>
         <CardHeader title="List of Exchange coins rates" />
+
+        <Box
+          sx={{
+            mb: 8,
+            px: 5,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* Use the same CustomAutocomplete component here */}
+          <Box
+            display="flex"
+            alignItems="flex-start"
+            justifyContent="space-between"
+            sx={{ marginRight: "20px", gap: "20px" }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleCheckUrl}
+              endIcon={<Icon icon="carbon:link" />}
+            >
+              Check URL
+            </Button>
+          </Box>
+        </Box>
 
         <DataGrid
           pagination

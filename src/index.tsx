@@ -5,11 +5,8 @@ import { RouterProvider } from "react-router-dom";
 
 // ** Styles
 import "./index.css";
-
-// ** Custom Components
 import { ReactQueryProvider } from "./pages";
-// ** Router
-import router from "./routes";
+import router from "./routes/BrowserRouter";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

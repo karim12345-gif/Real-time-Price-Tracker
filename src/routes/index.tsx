@@ -1,18 +1,18 @@
-import { createBrowserRouter } from "react-router-dom";
-import { DetailsPage, HomePage, NotFoundPage } from "../pages";
+const pageRoutes = {
+  home: "/home",
+  detailsPage: "/detailsPage",
+};
 
-// ** Router configuration
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <NotFoundPage />,
-  },
-  {
-    path: "/detailsPage",
-    element: <DetailsPage />,
-    errorElement: <NotFoundPage />,
-  },
-]);
+const errorRoutes = {
+  401: "/401",
+  404: "/404",
+  500: "/500",
+  error: "/error",
+};
 
-export default router;
+const routes = {
+  ...pageRoutes,
+  ...errorRoutes,
+};
+
+export default routes;

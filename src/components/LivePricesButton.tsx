@@ -2,24 +2,23 @@
 import { Button } from "@mui/material";
 
 // ** React imports
-import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 
 //**  The component is used to navigate back to the home page when clicked.
-const BackArrowButton = () => {
+const LivePricesButton = () => {
   const navigate = useNavigate();
   return (
-    <div style={{ marginTop: "20px", padding: "10px" }}>
+    <div style={{ marginBottom: "40px" }}>
       <Button
-        role="button"
-        onClick={() => navigate("/")}
         variant="contained"
-        endIcon={<Icon icon="ion:arrow-back-outline" />}
+        onClick={() => navigate("/detailsPage")}
+        endIcon={<Icon icon="fa6-solid:chart-line" />}
       >
-        Back
+        Check Live Prices
       </Button>
     </div>
   );
 };
 
-export default BackArrowButton;
+export default LivePricesButton;

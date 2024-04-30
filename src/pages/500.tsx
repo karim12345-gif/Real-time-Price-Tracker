@@ -30,7 +30,6 @@ const Img = styled("img")(({ theme }) => ({
     height: 400,
   },
 }));
-
 //** Styled component Typography
 const StyledTypography = styled(Typography)`
   color: #fff;
@@ -65,7 +64,11 @@ const Error500 = () => {
             Oops, something went wrong!
           </StyledTypography>
         </BoxWrapper>
-        <Img alt="error-illustration" src="/images/pages/404.png" />
+        <Img
+          height="400"
+          alt="error-illustration"
+          src="/images/pages/404.png"
+        />
         <Button component={Link} to="/" variant="contained" sx={{ px: 5.5 }}>
           Back to Home
         </Button>
