@@ -75,7 +75,7 @@ Here are the links to the documentation for reference:
 
 ### figure shows the expected data available from the endpoint
 
-![alt text](image.png)
+![alt text](/public/images/pages/image.png)
 
 #### 2- To subscribe to the market stream we have to enter the keys according to the specified API documentation
 
@@ -108,7 +108,7 @@ Set the following environment variables in a .env file in the root directory of 
 
 ### figure shows the expected data available from the endpoint
 
-![alt text](image-1.png)
+![alt text](/public/images/pages/image-1.png)
 
 #### 2- Once we have the api, we can create an interface that has the body response of that api, pass it in our react query hook to expect the response.
 
