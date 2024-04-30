@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import { Header } from "../../components";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Suspense } from "react";
-
 import LivePricesButton from "../../components/LivePricesButton";
 
 // Lazy loading for OptionsContractTable component
