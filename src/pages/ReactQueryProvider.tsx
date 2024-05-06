@@ -1,5 +1,4 @@
 import {
-  MutationCache,
   QueryCache,
   QueryClient,
   QueryClientProvider,
@@ -9,10 +8,8 @@ import { ReactQueryProviderProps } from "../interfaces";
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const queryClient = new QueryClient({
+    //** query cache will fetch data and store it and when called it will get the result from stored cache this improves performance */
     queryCache: new QueryCache({
-      onError: (error: any) => ResponseModelHelper(error),
-    }),
-    mutationCache: new MutationCache({
       onError: (error: any) => ResponseModelHelper(error),
     }),
     defaultOptions: {
@@ -24,6 +21,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   });
 
   return (
+    // ** children is the component that will be wrapped by the QueryClientProvider
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };

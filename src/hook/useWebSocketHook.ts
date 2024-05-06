@@ -15,12 +15,12 @@ const useWebSocket = (url: string) => {
   // ** WebSocket connection
   const newSocket = new WebSocket(url);
 
-  // ** WebSocket connection handlers with keys
+  // ** WebSocket connection handlers with keys and this will subscribe to a streams
   const handleOpen = () => {
     newSocket.send(
       JSON.stringify({
         id: process.env.REACT_APP_WEBSOCKET_ID_KEY,
-        method: process.env.REACT_APP_WEBSOCKET_METHOD_KEY,
+        method: process.env.REACT_APP_WEBSOCKET_SUBSCRIPTION_METHOD_KEY,
         params: process.env.REACT_APP_WEBSOCKET_PARAMS_KEY,
       })
     );
@@ -28,17 +28,18 @@ const useWebSocket = (url: string) => {
 
   // ** WebSocket message handler
   const handleMessage = (event: MessageEvent) => {
-    if (event.data === 'ping') {
-      newSocket.send('pong');
+     //** Checking if the received message is a "ping" message
+    if (event.data === 'ping' || event.data === 'ping frame') {
+      newSocket.send('pong' || 'pong frame');
       return;
     }
 
     try {
-      // ** Parsing JSON data
+      // ** Parsing JSON data since data from web socket is string, so we need to convert it to javascript object
       const { data }: { stream: string; data: IMarketStreams } = JSON.parse(
         event.data as string
       );
-      // ** Setting market data to state
+      // ** passing the data to the state
       setMarketData(data);
     } catch (error) {
     
@@ -61,12 +62,15 @@ const useWebSocket = (url: string) => {
     newSocket.onopen = handleOpen;
     newSocket.onmessage = handleMessage;
     newSocket.onclose = handleClose;
+    
 
     return () => {
     newSocket.close();
     };
   }, [url]);
 
+
+  // ** Return market data and error states , which will be used globally in the app
   return { marketData, error };
 };
 
