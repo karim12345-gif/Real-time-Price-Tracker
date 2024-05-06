@@ -10,7 +10,7 @@ const GetListOptionsContract = async (): Promise<IOptionsContractResponse> => {
   const response: AxiosResponse<IOptionsContractResponse> = await axios.get(
     PolygonApi.getOptionsContract(),
   )
-
+  
   return response.data  
 }
 

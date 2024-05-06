@@ -14,7 +14,6 @@ type OptionsContractResponse = {
   underlying_ticker: string;
 };
 
-
 interface IOptionsContractResponse {
   results: OptionsContractResponse[],
   status: string,
@@ -54,11 +53,6 @@ interface ExchangeResponseRow {
 interface ReactQueryProviderProps {
   children: React.ReactNode;
 }
-
-
-
-
-
 
 
 export type {  IOptionsContractResponse, OptionsContractResponse,IMarketStreams, CardData, ExchangeResponseRow, ReactQueryProviderProps};

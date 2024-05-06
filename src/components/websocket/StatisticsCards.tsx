@@ -26,6 +26,8 @@ const StatisticsCards: React.FC = () => {
   //** Custom hook to get market data */
   const { marketData, error } = useWebSocket(url);
 
+  // console.log("marketData", marketData);
+
   //** Card data */
   const cardData: CardData[] = [
     {

@@ -17,7 +17,7 @@ describe("Detail Page", () => {
     );
     // ** Get the  button by its role and assert its presence
     const linkButton = screen.getByRole("button", { name: "Back" });
-    // ** check if LinkButton in the document
+    // ** assert to check if LinkButton in the document
     expect(linkButton).toBeInTheDocument();
   });
 
