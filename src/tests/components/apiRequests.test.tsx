@@ -3,11 +3,12 @@ import { renderHook } from "@testing-library/react-hooks";
 
 // ** hooks imports
 import { useGetListOptionsContract } from "../../services/hooks";
-import { useWebSocket } from "../../hook";
+
 // ** custom pages imports
 import { ReactQueryProvider } from "../../pages";
 // ** vitest imports
 import { expect } from "vitest";
+import { WebSocketProvider, useWebSocket } from "../../context";
 
 describe("make sure all requests are made", () => {
   test("get list option contract", async () => {
@@ -31,9 +32,14 @@ describe("make sure all requests are made", () => {
 
   test("successful response from websocket", async () => {
     const url = "ws://localhost:8000/ws";
+    const wrapper = ({ children }: any) => (
+      <WebSocketProvider>{children}</WebSocketProvider>
+    );
 
     // ** Render the hook useWebSocket with the provided URL
-    const { result, waitFor } = renderHook(() => useWebSocket(url));
+    const { result, waitFor } = renderHook(() => useWebSocket(url), {
+      wrapper,
+    });
 
     await waitFor(() => typeof result.current.marketData !== "undefined", {
       timeout: 10000,

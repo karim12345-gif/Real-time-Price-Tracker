@@ -1,4 +1,5 @@
 import UseBgColor from "./useBgColor";
-import useWebSocket from "./useWebSocketHook";
+import useWebSocketCustomHook from "./useWebSocketHook";
 
-export {useWebSocket, UseBgColor}
+
+export { UseBgColor,useWebSocketCustomHook }

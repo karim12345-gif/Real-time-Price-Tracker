@@ -14,17 +14,18 @@ import { Icon } from "@iconify/react";
 //** my components */
 import CustomChip from "../chip/CustomeChip";
 import { Error500 } from "../../pages";
-import { useWebSocket } from "../../hook";
+
 import CircularIndeterminate from "../spinner/CircularIndeterminate";
 
 //** interface */
 import { CardData } from "../../interfaces";
+import { useWebSocket } from "../../context";
 
 const StatisticsCards: React.FC = () => {
-  const url = process.env.REACT_APP_WEBSOCKET_URL_LINK || "no url found";
+  const url = process.env.REACT_APP_WEBSOCKET_URL_LINK || "";
 
   //** Custom hook to get market data */
-  const { marketData, error } = useWebSocket(url);
+  const { marketData, error } = useWebSocket(url); // Use the useWebSocket hook instead of WebSocketProvider
 
   // console.log("marketData", marketData);
 

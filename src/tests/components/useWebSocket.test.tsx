@@ -1,6 +1,6 @@
-import { useWebSocket } from "../../hook";
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react";
+import { WebSocketProvider, useWebSocket } from "../../context";
 
 vi.mock("ws", () => ({
   // __esModule: true,
@@ -20,7 +20,11 @@ describe("useWebSocket", () => {
   test("should return a valid hook", async () => {
     const url = "ws://localhost:8000/ws";
 
-    const { result } = renderHook(() => useWebSocket(url));
+    const wrapper = ({ children }: any) => (
+      <WebSocketProvider>{children}</WebSocketProvider>
+    );
+
+    const { result } = renderHook(() => useWebSocket(url), { wrapper });
 
     // ** Asserting initial values of states should be null
     expect(result.current.marketData).toBeNull();
@@ -38,9 +42,16 @@ describe("useWebSocket", () => {
     newSocket.onclose = vi.fn();
     newSocket.addEventListener = vi.fn();
 
-    const { result } = renderHook(() => useWebSocket("ws://localhost:8000/ws"));
+    const wrapper = ({ children }: any) => (
+      <WebSocketProvider>{children}</WebSocketProvider>
+    );
 
-    // ** Using act to update state within tests
+    const { result } = renderHook(
+      () => useWebSocket("ws://localhost:8000/ws"),
+      { wrapper }
+    );
+
+    // ** act is used to update state coming from marketData
     await act(async () => {
       // ** Setting marketData to a mock data object
       result.current.marketData = {

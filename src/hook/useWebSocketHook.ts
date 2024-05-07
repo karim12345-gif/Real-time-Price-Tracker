@@ -8,7 +8,7 @@ import { IMarketStreams } from '../interfaces';
 import toast from 'react-hot-toast';
 
 // ** Custom hook to get market data */
-const useWebSocket = (url: string) => {
+const useWebSocketCustomHook = (url: string) => {
   // ** States
   const [marketData, setMarketData] = useState<IMarketStreams | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -78,4 +78,4 @@ const useWebSocket = (url: string) => {
   return { marketData, error };
 };
 
-export default useWebSocket;
+export default useWebSocketCustomHook;
