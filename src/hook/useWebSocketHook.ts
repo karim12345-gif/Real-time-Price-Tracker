@@ -1,3 +1,4 @@
+'use server'
 
 // ** React Import
 import { useEffect, useState } from 'react';
@@ -65,6 +66,7 @@ const useWebSocket = (url: string) => {
     newSocket.onmessage = handleMessage;
     newSocket.onclose = handleClose;
     
+
 
     return () => {
     newSocket.close();

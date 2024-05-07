@@ -22,6 +22,7 @@ export const useGetListOptionsContract = (
 ) => {
   return useQuery({
     queryKey: ['GetCoinList'],
-    queryFn: () => GetListOptionsContract()
+    queryFn: () => GetListOptionsContract(),
+   
   })
 }

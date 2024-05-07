@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ** React Imports
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Icon } from "@iconify/react";
 
 // ** MUI Imports
@@ -21,21 +21,8 @@ import { ExchangeResponseRow, OptionsContractResponse } from "../interfaces";
 import { useGetListOptionsContract } from "../services/hooks/useGetListOptionsContract";
 
 const OptionsContractTable = () => {
-  //** states */
-  const [rows, setRows] = useState<OptionsContractResponse[]>([]);
-  const [total, setTotal] = useState(0);
-  const [paginationModel, setPaginationModel] = useState({
-    page: 1,
-    pageSize: 5,
-  });
-
   //** fetching data from the API with react query hook
   const { data, isLoading, error } = useGetListOptionsContract();
-
-  useEffect(() => {
-    setTotal(5 || 0);
-    setRows(data?.results || []);
-  }, [data]);
 
   const statusValue = data?.status ? "success" : "error";
 
@@ -171,7 +158,7 @@ const OptionsContractTable = () => {
       },
     ];
 
-    // data grid
+    //** data grid
     return (
       <Card>
         <CardHeader title="List of Exchange coins rates" />
@@ -205,16 +192,15 @@ const OptionsContractTable = () => {
 
         <DataGrid
           pagination
-          rows={rows}
-          rowCount={total}
+          rows={data?.results || []}
+          rowCount={5} // ** if we had a count to pass then it would be better, but for now static is fine
           columns={columns}
           autoHeight={true}
           loading={isLoading}
           paginationMode="server"
           disableRowSelectionOnClick
           pageSizeOptions={[5]}
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
+          paginationModel={{ page: 1, pageSize: 5 }}
           getRowId={(row: OptionsContractResponse) =>
             `${row.cfi}-${row.ticker}`
           }
