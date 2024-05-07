@@ -7,7 +7,7 @@ import { DetailsPage, ReactQueryProvider } from "../../pages";
 
 describe("Detail Page", () => {
   test("it should render back button", async () => {
-    // ** Render the DetailsPage within ReactQueryProvider and BrowserRouter
+    // ** render the DetailsPage component, and allow routing
     render(
       <ReactQueryProvider>
         <BrowserRouter>

@@ -15,11 +15,12 @@ describe("make sure all requests are made", () => {
       <ReactQueryProvider>{children}</ReactQueryProvider>
     );
 
-    // ** Render the hook useGetListOptionsContract within the provided wrapper
+    // ** Render the hook helps to test the useGetListOptionsContract hook
     const { result, waitFor } = renderHook(() => useGetListOptionsContract(), {
       wrapper,
     });
 
+    // ** Wait for the request to be successful
     await waitFor(() => result.current.isSuccess, {
       timeout: 10000,
     });

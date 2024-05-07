@@ -22,7 +22,7 @@ describe("useWebSocket", () => {
 
     const { result } = renderHook(() => useWebSocket(url));
 
-    // ** Asserting initial values of marketData and error
+    // ** Asserting initial values of states should be null
     expect(result.current.marketData).toBeNull();
     expect(result.current.error).toBeNull();
   });
@@ -43,21 +43,6 @@ describe("useWebSocket", () => {
     // ** Using act to update state within tests
     await act(async () => {
       // ** Setting marketData to a mock data object
-      result.current.marketData = {
-        "24hVolume": "",
-        fundingRate: "",
-        nextFundingTime: 0,
-        indexPrice: "",
-        markPrice: "",
-        lastTradePrice: "",
-        liquidationPriceOff: "",
-        liquidationThreshold: "",
-        openInterest: "",
-        price24HAgo: "",
-      };
-      result.current.error = null;
-      result.current.marketData = null;
-      result.current.error = null;
       result.current.marketData = {
         "24hVolume": "",
         fundingRate: "",

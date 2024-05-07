@@ -26,9 +26,9 @@ export const ResponseModelHelper = (error: any) => {
   if (isResponseModel(error.response.data)) {
     const { result, message } = error.response.data;
 
-    if (result === 401) {
+    if (result === 400 ) {
       // Redirect to home page if unauthorized
-      navigate(routes.home);
+       navigate(routes[404])
       return;
     } else {
       toast.error(message, { id: 'loading' });
@@ -36,9 +36,9 @@ export const ResponseModelHelper = (error: any) => {
     }
   } else {
     const status = error.response.status;
-    if (status === 401) {
+    if (status === 400) {
       // Redirect to home page if unauthorized
-      navigate(routes.home);
+       navigate(routes[404])
       toast.error(error.message, { id: 'loading' });
       return;
     } else if (status === 500 ) {

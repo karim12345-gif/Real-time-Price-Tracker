@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 //* interface import
 import { IMarketStreams } from '../interfaces';
+import toast from 'react-hot-toast';
 
 // ** Custom hook to get market data */
 const useWebSocket = (url: string) => {
@@ -26,6 +27,7 @@ const useWebSocket = (url: string) => {
     );
   };
 
+  
   // ** WebSocket message handler
   const handleMessage = (event: MessageEvent) => {
      //** Checking if the received message is a "ping" message
@@ -42,7 +44,7 @@ const useWebSocket = (url: string) => {
       // ** passing the data to the state
       setMarketData(data);
     } catch (error) {
-    
+      toast.error('Error parsing JSON:');
       console.error('Error parsing JSON:', error);
     }
   };
